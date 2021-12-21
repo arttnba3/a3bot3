@@ -1,12 +1,8 @@
 # a3bot3 - Documentation
 
-$$
-Yet\ another\ QQbot\ frame\ developed\ by\ arttnba3,\ based\ on\ go-cqhttp
-$$
-
 ## Introduction
 
-Yet another QQbot developed by arttnba3 with golang, based on go-cqhttp
+_Yet another QQbot developed by arttnba3 with golang, based on go-cqhttp_
 
 ## Usage
 
