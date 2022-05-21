@@ -5,42 +5,56 @@ import (
 	"a3bot3/event"
 )
 
-type Plugin struct {
-	Enable bool
-	Name   string
+type PluginInfo struct {
+	Enable  bool
+	Name    string
+	Command string
+	Plugin
 }
 
-type Operations interface {
-	SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent) int
-	SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent) int
+type Plugin interface {
+	SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int
+	SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
+	IsEnable() bool
+	GetName() string
+	MatchCommand(cmd string) bool
+	SetEnable(enable bool)
 }
 
 var MESSAGE_BLOCK = 1
 var MESSAGE_IGNORE = 0
 
-// Following are an example of plugin
-
-var ExamplePLugin = Plugin{
-	Enable: true,
-	Name:   "ExamplePlugin",
+// Plugins :
+// This is the array of instances of all available plugins.
+var Plugins = [...]Plugin{
+	&PluginManager{
+		PluginInfo: PluginInfo{
+			Enable:  true,
+			Name:    "PluginManager",
+			Command: "/plugin",
+		},
+	},
+	&ExamplePlugin{
+		PluginInfo: PluginInfo{
+			Enable:  false,
+			Name:    "ExamplePlugin",
+			Command: "/hello",
+		},
+	},
 }
 
-func (p *Plugin) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent) int {
-	// do not pass message to next plugin
-	if privateEvent.Message == "Hello a3bot3!" {
-		bot.SendPrivateMsg(privateEvent.UserID, "Hello world!", false)
-	}
-	// continuous passing message to next plugin
-	return MESSAGE_IGNORE
+func (p *PluginInfo) IsEnable() bool {
+	return p.Enable
 }
 
-func (p *Plugin) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent) int {
-	// do not pass message to next plugin
-	if groupEvent.Message == "Hello a3bot3!" {
-		bot.SendGroupMsg(groupEvent.GroupID, "Hello group!", false)
-		return MESSAGE_BLOCK
-	} else {
-		// continuous passing message to next plugin
-		return MESSAGE_IGNORE
-	}
+func (p *PluginInfo) GetName() string {
+	return p.Name
+}
+
+func (p *PluginInfo) MatchCommand(cmd string) bool {
+	return cmd == p.Command
+}
+
+func (p *PluginInfo) SetEnable(enable bool) {
+	p.Enable = enable
 }

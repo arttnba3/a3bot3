@@ -3,7 +3,8 @@ package main
 import (
 	"a3bot3/api"
 	"a3bot3/bot"
-	"a3bot3/http_bot"
+	"a3bot3/bot/http_bot"
+	"a3bot3/config"
 	"a3bot3/info"
 	"encoding/json"
 	"io"
@@ -19,19 +20,6 @@ import (
  * of the filed is not an upper char
  */
 
-type URLForm struct {
-	Host string `json:"host"`
-	Port int    `json:"port"`
-}
-
-type Settings struct {
-	Listen URLForm `json:"listen"`
-	Post   URLForm `json:"post"`
-	Type   string  `json:"type"`
-}
-
-var settings Settings
-
 func BotStart() {
 	info.GreenMsg("================================================")
 	info.GreenMsg("================     a3bot3     ================")
@@ -46,18 +34,18 @@ func BotStart() {
 	LoadingSettings()
 	log.Println("Connecting...")
 
-	switch settings.Type {
+	switch config.Settings.Type {
 	case string("http"):
-		log.Println("http listening on:", settings.Listen.Host, "port:", settings.Listen.Port)
-		log.Println("http posting on:", settings.Post.Host, "port:", settings.Post.Port)
+		log.Println("http listening on:", config.Settings.Listen.Host, "port:", config.Settings.Listen.Port)
+		log.Println("http posting on:", config.Settings.Post.Host, "port:", config.Settings.Post.Port)
 		bot.A3bot = &http_bot.HTTPBot{
 			Bot: api.Bot{
-				Host: settings.Post.Host,
-				Port: settings.Post.Port,
+				Host: config.Settings.Post.Host,
+				Port: config.Settings.Post.Port,
 				UUID: 0,
 			},
 		}
-		http_bot.HTTPListener(settings.Listen.Host, settings.Listen.Port)
+		http_bot.CQHTTPListener(config.Settings.Listen.Host, config.Settings.Listen.Port)
 	case string("ws"):
 		log.Panicln("websocket is coming soon.....")
 	case string("reverse_ws"):
@@ -74,7 +62,7 @@ func LoadingSettings() {
 		panic(err)
 	}
 
-	err = json.Unmarshal([]byte(data), &settings)
+	err = json.Unmarshal([]byte(data), &config.Settings)
 	if err != nil {
 		info.RedMsg("ERROR OCCUR WHILE PARSING JSON FILE!")
 		panic(err)
