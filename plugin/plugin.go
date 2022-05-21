@@ -41,6 +41,14 @@ var Plugins = [...]Plugin{
 			Command: "/hello",
 		},
 	},
+	&RepeaterPlugin{
+		PluginInfo: PluginInfo{
+			Enable:  true,
+			Name:    "RepeaterPlugin",
+			Command: "",
+			Plugin:  nil,
+		},
+	},
 }
 
 func (p *PluginInfo) IsEnable() bool {

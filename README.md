@@ -50,6 +50,14 @@ Supported connection type now:
 
 The a3bot3 satisfies the [OneBot API](https://onebot.dev/), with Camel-Case
 
+## Plugins
+
+Available plugins are as bellow:
+
+- `PluginSystem` : The plugin to control all other plugins
+- `ExamplePlugin` : Only a model of plugin
+- `RepeaterPlugin` : Repeat the message that had been repeated for twice. The same message will only be repeated once.
+
 ## _I'd like to develop new plugin..._
 
 If you'd like to add a new plugin, you should create your plugin according to `ExamplePlugin` in `plugin/example_plugin.go`, make it inheritance the `PluginInfo` strutct and complete two method:
