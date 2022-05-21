@@ -59,11 +59,11 @@ type YourPlugin struct {
 	PluginInfo
 }
 
-func (p *ExamplePlugin) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
+func (p *YourPlugin) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
 	// implement it
 }
 
-func (p *ExamplePlugin) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+func (p *YourPlugin) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	// implement it
 }
 ```
