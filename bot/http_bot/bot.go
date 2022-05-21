@@ -62,17 +62,21 @@ func (bot *HTTPBot) GetResponse(uuid string) ([]byte, error) {
 	}
 }
 
-// HTTPListener
+// CQHTTPListener
 /*
  *
  */
-func HTTPListener(host string, port int) {
+func CQHTTPListener(host string, port int) {
 	fmt.Println("serving:" + host + ":" + strconv.Itoa(port))
-	http.HandleFunc("/", HTTPServer)
-	http.ListenAndServe(host+":"+strconv.Itoa(port), nil)
+	http.HandleFunc("/", CQHTTPServer)
+	err := http.ListenAndServe(host+":"+strconv.Itoa(port), nil)
+	if err != nil {
+		log.Println(err)
+		return
+	}
 }
 
-func HTTPServer(resp http.ResponseWriter, request *http.Request) {
+func CQHTTPServer(resp http.ResponseWriter, request *http.Request) {
 	var perEvent event.Event
 
 	data, _ := ioutil.ReadAll(request.Body)

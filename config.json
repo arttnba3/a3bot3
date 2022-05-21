@@ -9,6 +9,7 @@
         "host":"127.0.0.1",
         "port":5701
     },
-    "type":"http"
+    "type":"http",
+    "parse_command_only":true,
+    "admin":1145141919 
 }
-
