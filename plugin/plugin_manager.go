@@ -84,9 +84,9 @@ func pluginManagerSolver(messages []string) string {
 				"load [name]   ---- load a plugin\n" +
 				"unload [name] ---- unload a plugin"
 		case "all":
-			replyMsg = "All plugins ('*' means it's enabled):\n"
+			replyMsg = "All plugins ('*' means it's enabled):"
 			for _, perPlugin := range Plugins {
-				replyMsg += perPlugin.GetName() + " ["
+				replyMsg += "\n" + perPlugin.GetName() + " ["
 				if perPlugin.IsEnable() {
 					replyMsg += "*"
 				} else {
@@ -110,7 +110,7 @@ func pluginManagerSolver(messages []string) string {
 				if obj == nil {
 					replyMsg = "plugin not found."
 				} else {
-					if messages[2] == "load" {
+					if messages[1] == "load" {
 						(*obj).SetEnable(true)
 					} else {
 						(*obj).SetEnable(false)
