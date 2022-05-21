@@ -13,7 +13,7 @@ type ExamplePlugin struct {
 
 func (p *ExamplePlugin) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
 	// continuous passing message to next plugin
-	if messages == nil || len(messages) < 1 || !p.MatchCommand(messages[1]) {
+	if messages == nil || len(messages) < 1 || !p.MatchCommand(messages[0]) {
 		return MESSAGE_IGNORE
 	}
 
@@ -25,7 +25,7 @@ func (p *ExamplePlugin) SendPrivateMsg(bot api.BotAPI, privateEvent event.Privat
 
 func (p *ExamplePlugin) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	// continuous passing message to next plugin
-	if messages == nil || len(messages) < 1 || !p.MatchCommand(messages[1]) {
+	if messages == nil || len(messages) < 1 || !p.MatchCommand(messages[0]) {
 		return MESSAGE_IGNORE
 	}
 
