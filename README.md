@@ -48,7 +48,7 @@ Supported connection type now:
 
 ## API
 
-The a3bot3 satisfies the [OneBot API](https://onebot.dev/), with Camel-Case
+The a3bot3 satisfies the [OneBot API](https://onebot.dev/), with Camel-Case (Because of fucking art of golang)
 
 ## Plugins
 
