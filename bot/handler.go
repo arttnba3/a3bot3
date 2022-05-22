@@ -57,6 +57,18 @@ func MessageHandler(perEvent event.Event) {
 		case "group_recall":
 			log.Println("user", perEvent.UserID, "'s message", perEvent.MessageID, "in group:", perEvent.GroupID, "is recalled.")
 			GroupEventHandler(A3bot, event.GroupEvent{Event: perEvent}, messages, "GroupRecallHandler")
+		case "group_upload":
+			log.Println("user", perEvent.UserID, "upload a file", perEvent.File.Name, "in group:", perEvent.GroupID)
+			GroupEventHandler(A3bot, event.GroupEvent{Event: perEvent}, messages, "GroupUploadHandler")
+		case "group_admin":
+			log.Println("user", perEvent.UserID, "'s admin", perEvent.MessageID, "in group:", perEvent.GroupID, "is", perEvent.SubType)
+			GroupEventHandler(A3bot, event.GroupEvent{Event: perEvent}, messages, "GroupAdminHandler")
+		case "group_increase":
+			log.Println("user", perEvent.UserID, "joined the group", perEvent.GroupID, ", type:", perEvent.SubType)
+			GroupEventHandler(A3bot, event.GroupEvent{Event: perEvent}, messages, "GroupIncreaseHandler")
+		case "group_decrease":
+			log.Println("user", perEvent.UserID, "left the group", perEvent.GroupID, ", type:", perEvent.SubType)
+			GroupEventHandler(A3bot, event.GroupEvent{Event: perEvent}, messages, "GroupDecreaseHandler")
 		default:
 			log.Println("Unsupported notice type:", perEvent.NoticeType)
 		}
