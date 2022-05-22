@@ -12,12 +12,12 @@ type RepeaterPlugin struct {
 	PluginInfo
 }
 
-func (p *RepeaterPlugin) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
+func (p *RepeaterPlugin) PrivateMsgHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
 	// we only repeat in group
 	return MESSAGE_IGNORE
 }
 
-func (p *RepeaterPlugin) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+func (p *RepeaterPlugin) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	groupId := groupEvent.GroupID
 
 	if lastMsgGroup[groupId] == groupEvent.Message {

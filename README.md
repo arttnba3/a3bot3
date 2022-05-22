@@ -70,11 +70,11 @@ type YourPlugin struct {
 	PluginInfo
 }
 
-func (p *YourPlugin) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
+func (p *YourPlugin) PrivateMsgHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
 	// implement it
 }
 
-func (p *YourPlugin) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+func (p *YourPlugin) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	// implement it
 }
 ```
