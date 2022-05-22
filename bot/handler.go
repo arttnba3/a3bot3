@@ -22,8 +22,8 @@ func MessageHandler(perEvent event.Event) {
 	var messages []string
 
 	switch perEvent.PostType {
-	// heartbeat, ignore
 	case "meta_event":
+		// heartbeat, ignore it
 		return
 	case "message":
 		/*
@@ -72,6 +72,9 @@ func MessageHandler(perEvent event.Event) {
 		default:
 			log.Println("Unsupported notice type:", perEvent.NoticeType)
 		}
+	case "request":
+		// no implementation yet
+		return
 	default:
 		log.Println("Invalid post type! Check your cq-http or contact the developer!")
 	}
@@ -90,7 +93,9 @@ func PrivateEventHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messag
 		handlerFunc := val.MethodByName(handlerName)
 		args := []reflect.Value{reflect.ValueOf(bot), reflect.ValueOf(privateEvent), reflect.ValueOf(messages)}
 
-		handlerFunc.Call(args)
+		if handlerFunc.Call(args)[0].Int() == int64(plugin.MESSAGE_BLOCK) {
+			return
+		}
 	}
 }
 
@@ -107,6 +112,8 @@ func GroupEventHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []s
 		handlerFunc := val.MethodByName(handlerName)
 		args := []reflect.Value{reflect.ValueOf(bot), reflect.ValueOf(groupEvent), reflect.ValueOf(messages)}
 
-		handlerFunc.Call(args)
+		if handlerFunc.Call(args)[0].Int() == int64(plugin.MESSAGE_BLOCK) {
+			return
+		}
 	}
 }
