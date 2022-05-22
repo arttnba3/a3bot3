@@ -42,10 +42,10 @@ func MessageHandler(perEvent event.Event) {
 		switch perEvent.MessageType {
 		case "private":
 			log.Println("received private message:\""+perEvent.Message+"\" from sender:", perEvent.UserID)
-			PrivateEventHandler(A3bot, event.PrivateEvent{Event: perEvent}, messages, "SendPrivateMsg")
+			PrivateEventHandler(A3bot, event.PrivateEvent{Event: perEvent}, messages, "PrivateMsgHandler")
 		case "group":
 			log.Println("received group message:\""+perEvent.Message+"\" from sender:", perEvent.Sender.UserID, "at group:", perEvent.GroupID)
-			GroupEventHandler(A3bot, event.GroupEvent{Event: perEvent}, messages, "SendGroupMsg")
+			GroupEventHandler(A3bot, event.GroupEvent{Event: perEvent}, messages, "GroupMsgHandler")
 		default:
 			log.Println("Unsupported message type:", perEvent.MessageType)
 		}
