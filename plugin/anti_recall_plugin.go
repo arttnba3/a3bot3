@@ -12,7 +12,7 @@ type AntiRecallPlugin struct {
 }
 
 func (p *AntiRecallPlugin) GroupRecallHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
-	recallMsg, err := bot.GetMsg(int(groupEvent.MessageID))
+	recallMsg, err := bot.GetMsg(groupEvent.MessageID)
 	if err != nil {
 		log.Println("failed to get recalled message, id:", groupEvent.MessageID)
 		return MESSAGE_IGNORE
@@ -28,7 +28,7 @@ func (p *AntiRecallPlugin) GroupRecallHandler(bot api.BotAPI, groupEvent event.G
 }
 
 func (p *AntiRecallPlugin) FriendRecallHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
-	recallMsg, err := bot.GetMsg(int(privateEvent.MessageID))
+	recallMsg, err := bot.GetMsg(privateEvent.MessageID)
 	if err != nil {
 		log.Println("failed to get recalled message, id:", privateEvent.MessageID)
 		return MESSAGE_IGNORE

@@ -31,7 +31,7 @@ type GroupParam struct {
 }
 
 type MessageParam struct {
-	MessageID int `json:"message_id"`
+	MessageID int32 `json:"message_id"`
 }
 
 type ResponseBody struct {
@@ -42,13 +42,13 @@ type ResponseBody struct {
 
 type ResponseData struct {
 	Message     string `json:"message"`
-	MessageID   int    `json:"message_id"`
+	MessageID   int32  `json:"message_id"`
 	Group       bool   `json:"group"`
-	MessageSeq  int    `json:"message_seq"`
+	MessageSeq  int64  `json:"message_seq"`
 	MessageType string `json:"message_type"`
-	ReadID      int    `json:"real_id"`
+	ReadID      int32  `json:"real_id"`
 	Sender      Sender `json:"sender"`
-	Time        int    `json:"time"`
+	Time        int32  `json:"time"`
 }
 
 type Sender struct {
@@ -58,19 +58,33 @@ type Sender struct {
 
 type Message struct {
 	Message     string `json:"message"`
-	MessageID   int    `json:"message_id"`
+	MessageID   int32  `json:"message_id"`
 	MessageType string `json:"message_type"`
-	ReadID      int    `json:"real_id"`
+	ReadID      int32  `json:"real_id"`
 	Sender      Sender `json:"sender"`
-	Time        int    `json:"time"`
+	Time        int32  `json:"time"`
+}
+
+type NodeData struct {
+	ID      int32       `json:"id"`
+	Name    string      `json:"name"`
+	UIN     int64       `json:"uin"`
+	Content interface{} `json:"content"`
+	Seq     interface{} `json:"seq"`
+}
+
+type Node struct {
+	Type string   `json:"type"`
+	Data NodeData `json:"data"`
 }
 
 type BotAPI interface {
-	SendPrivateMsg(userId int64, message interface{}, autoEscape bool) int
-	SendGroupMsg(groupId int64, message interface{}, autoEscape bool) int
-	SendMsg(messageType string, userId int64, groupId int64, message interface{}, autoEscape bool) (int, error)
-	DeleteMsg(messageId int)
-	GetMsg(messageId int) (Message, error)
+	SendPrivateMsg(userId int64, message interface{}, autoEscape bool) int32
+	SendGroupMsg(groupId int64, message interface{}, autoEscape bool) int32
+	SendGroupForwardMsg(groupId int64, message interface{})
+	SendMsg(messageType string, userId int64, groupId int64, message interface{}, autoEscape bool) (int32, error)
+	DeleteMsg(messageId int32)
+	GetMsg(messageId int32) (Message, error)
 }
 
 func (bot *Bot) NextUUID() int {
