@@ -17,6 +17,7 @@ type Event struct {
 	Sender      Sender    `json:"sender"`
 	Anonymous   Anonymous `json:"anonymous"`
 	OperatorID  int64     `json:"operator_id"`
+	File        File      `json:"file"`
 }
 
 type PrivateEvent struct {
@@ -43,4 +44,11 @@ type Anonymous struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
 	Flag int64  `json:"flag"`
+}
+
+type File struct {
+	ID    int64  `json:"id"`
+	Name  string `json:"name"`
+	Size  int64  `json:"size"`
+	Busid int64  `json:"busid"`
 }
