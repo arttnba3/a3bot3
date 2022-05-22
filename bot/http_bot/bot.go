@@ -82,7 +82,7 @@ func CQHTTPServer(resp http.ResponseWriter, request *http.Request) {
 	data, _ := ioutil.ReadAll(request.Body)
 	err := json.Unmarshal(data, &perEvent)
 	if err != nil {
-		log.Println("Invalid response from cq-http:", resp)
+		log.Println("Invalid data from cq-http:", data)
 		return
 	}
 
