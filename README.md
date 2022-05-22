@@ -57,6 +57,7 @@ Available plugins are as bellow:
 - `PluginSystem` : The plugin to control all other plugins
 - `ExamplePlugin` : Only a model of plugin
 - `RepeaterPlugin` : Repeat the message that had been repeated for twice. The same message will only be repeated once.
+- `AntiRecallPlugin` : Resend the message that had been recalled. _Fighting against all recalled message!_
 
 ## _I'd like to develop new plugin..._
 
@@ -90,6 +91,10 @@ var Plugins = [...]plugin.Plugin{
 	},
 }
 ```
+
+- `Enable` : It decides whether your plugin is loaded when the bot starts.
+- `Name` : Name of your plugin.
+- `Command` : Command of your plugin. You can use `MatchCommand()` to check whether the user's input match the command.
 
 ## To-do list
 

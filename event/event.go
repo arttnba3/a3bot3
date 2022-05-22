@@ -16,6 +16,7 @@ type Event struct {
 	Font        int32     `json:"font"`
 	Sender      Sender    `json:"sender"`
 	Anonymous   Anonymous `json:"anonymous"`
+	OperatorID  int64     `json:"operator_id"`
 }
 
 type PrivateEvent struct {

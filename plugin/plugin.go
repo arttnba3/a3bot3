@@ -19,6 +19,10 @@ type Plugin interface {
 	GetName() string
 	MatchCommand(cmd string) bool
 	SetEnable(enable bool)
+	GroupRecallHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
+	FriendRecallHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int
+	GroupUploadHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
+	GroupAdminHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
 }
 
 var MESSAGE_BLOCK = 1
@@ -46,9 +50,22 @@ var Plugins = [...]Plugin{
 			Enable:  true,
 			Name:    "RepeaterPlugin",
 			Command: "",
-			Plugin:  nil,
 		},
 	},
+	&AntiRecallPlugin{
+		PluginInfo: PluginInfo{
+			Enable: false,
+			Name:   "AntiRecallPlugin",
+		},
+	},
+}
+
+func (p *PluginInfo) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
+	return MESSAGE_IGNORE
+}
+
+func (p *PluginInfo) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+	return MESSAGE_IGNORE
 }
 
 func (p *PluginInfo) IsEnable() bool {
@@ -65,4 +82,20 @@ func (p *PluginInfo) MatchCommand(cmd string) bool {
 
 func (p *PluginInfo) SetEnable(enable bool) {
 	p.Enable = enable
+}
+
+func (p *PluginInfo) GroupRecallHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+	return MESSAGE_IGNORE
+}
+
+func (p *PluginInfo) FriendRecallHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
+	return MESSAGE_IGNORE
+}
+
+func (p *PluginInfo) GroupUploadHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+	return MESSAGE_IGNORE
+}
+
+func (p *PluginInfo) GroupAdminHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+	return MESSAGE_IGNORE
 }
