@@ -79,6 +79,11 @@ func (p *YourPlugin) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent
 }
 ```
 
+For functions of a plugin, two kinds of return value is valid:
+
+- `MESSAGE_IGNORE` : the message will be passed to next plugin continuously.
+- `MESSAGE_BLOCK` : the message will be blocked by this plugin, which means that the next plugin cannot receive it.
+
 Then add a new instance under `plugin/config.go`:
 
 ```go

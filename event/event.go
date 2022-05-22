@@ -18,6 +18,7 @@ type Event struct {
 	Anonymous   Anonymous `json:"anonymous"`
 	OperatorID  int64     `json:"operator_id"`
 	File        File      `json:"file"`
+	RequestType string    `json:"request_type"`
 }
 
 type PrivateEvent struct {
