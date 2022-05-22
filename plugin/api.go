@@ -6,8 +6,8 @@ import (
 )
 
 type Plugin interface {
-	SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int
-	SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
+	PrivateMsgHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int
+	GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
 	IsEnable() bool
 	GetName() string
 	MatchCommand(cmd string) bool
@@ -23,15 +23,15 @@ type Plugin interface {
 var MESSAGE_BLOCK = 1
 var MESSAGE_IGNORE = 0
 
-// SendPrivateMsg :
+// PrivateMsgHandler :
 // handler with private message
-func (p *PluginInfo) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
+func (p *PluginInfo) PrivateMsgHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
 	return MESSAGE_IGNORE
 }
 
-// SendGroupMsg :
+// GroupMsgHandler :
 // handler with group message
-func (p *PluginInfo) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+func (p *PluginInfo) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	return MESSAGE_IGNORE
 }
 

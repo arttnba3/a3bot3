@@ -11,7 +11,7 @@ type PluginManager struct {
 	PluginInfo
 }
 
-func (p *PluginManager) SendPrivateMsg(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
+func (p *PluginManager) PrivateMsgHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
 	var replyMsg string
 
 	// re-parsing if necessary
@@ -36,7 +36,7 @@ func (p *PluginManager) SendPrivateMsg(bot api.BotAPI, privateEvent event.Privat
 	return MESSAGE_BLOCK
 }
 
-func (p *PluginManager) SendGroupMsg(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
+func (p *PluginManager) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	var replyMsg string
 
 	// re-parsing if necessary
