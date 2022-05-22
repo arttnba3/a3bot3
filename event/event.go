@@ -47,8 +47,9 @@ type Anonymous struct {
 }
 
 type File struct {
-	ID    int64  `json:"id"`
+	ID    string `json:"id"`
 	Name  string `json:"name"`
 	Size  int64  `json:"size"`
 	Busid int64  `json:"busid"`
+	Url   string `json:"url"`
 }

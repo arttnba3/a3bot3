@@ -14,7 +14,7 @@ type Plugin interface {
 	SetEnable(enable bool)
 	GroupRecallHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
 	FriendRecallHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int
-	GroupUploadHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
+	GroupUploadHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int // in problem! fix later...
 	GroupAdminHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
 	GroupIncreaseHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
 	GroupDecreaseHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int
