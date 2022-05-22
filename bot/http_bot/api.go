@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func (bot *HTTPBot) SendPrivateMsg(userId int64, message interface{}, autoEscape bool) int {
+func (bot *HTTPBot) SendPrivateMsg(userId int64, message interface{}, autoEscape bool) int32 {
 	// send request to cq-http
 	var uuid = strconv.Itoa(bot.NextUUID()) + strconv.Itoa(time.Now().Nanosecond())
 	var data = api.Action{
@@ -35,7 +35,7 @@ func (bot *HTTPBot) SendPrivateMsg(userId int64, message interface{}, autoEscape
 	return respData.Data.MessageID
 }
 
-func (bot *HTTPBot) SendGroupMsg(groupId int64, message interface{}, autoEscape bool) int {
+func (bot *HTTPBot) SendGroupMsg(groupId int64, message interface{}, autoEscape bool) int32 {
 	// send request to cq-http
 	var uuid = strconv.Itoa(bot.NextUUID()) + strconv.Itoa(time.Now().Nanosecond())
 	var data = api.Action{
@@ -61,11 +61,32 @@ func (bot *HTTPBot) SendGroupMsg(groupId int64, message interface{}, autoEscape 
 	return respData.Data.MessageID
 }
 
-func (bot *HTTPBot) SendMsg(messageType string, userId int64, groupId int64, message interface{}, autoEscape bool) (int, error) {
+// SendGroupForwardMsg :
+// THIS IS AN INVALID API AND I DON"T KNOW WHY, maybe you should ask developers of cq-http.
+// For the param message, an array of Node struct is needed.
+func (bot *HTTPBot) SendGroupForwardMsg(groupId int64, message interface{}) {
+	// send request to cq-http
+	var uuid = strconv.Itoa(bot.NextUUID()) + strconv.Itoa(time.Now().Nanosecond())
+	var data = api.Action{
+		Action: "send_group_forward_msg",
+		Params: api.GroupParam{
+			GroupID: groupId,
+			Message: message,
+		},
+		UUID: uuid,
+	}
+	log.Println("send message to group", groupId, ":", message)
+	bot.SendRequest(data)
+}
+
+// SendMsg :
+// send out a message. for this function I don't use the /send_msg api of cq-http,
+// but to check for message type and call SendPrivateMsg/SendGroupMsg.
+func (bot *HTTPBot) SendMsg(messageType string, userId int64, groupId int64, message interface{}, autoEscape bool) (int32, error) {
 	switch messageType {
-	case string("private"):
+	case "private":
 		return bot.SendPrivateMsg(userId, message, autoEscape), nil
-	case string("group"):
+	case "group":
 		return bot.SendGroupMsg(groupId, message, autoEscape), nil
 	default:
 		log.Println("Invalid type of message! Check your code!")
@@ -73,7 +94,7 @@ func (bot *HTTPBot) SendMsg(messageType string, userId int64, groupId int64, mes
 	}
 }
 
-func (bot *HTTPBot) DeleteMsg(messageId int) {
+func (bot *HTTPBot) DeleteMsg(messageId int32) {
 	// send request to cq-http
 	var uuid = strconv.Itoa(bot.NextUUID()) + strconv.Itoa(time.Now().Nanosecond())
 	var data = api.Action{
@@ -88,7 +109,7 @@ func (bot *HTTPBot) DeleteMsg(messageId int) {
 	_, _ = bot.GetResponse(uuid)
 }
 
-func (bot *HTTPBot) GetMsg(messageId int) (api.Message, error) {
+func (bot *HTTPBot) GetMsg(messageId int32) (api.Message, error) {
 	// send request to cq-http
 	var uuid = strconv.Itoa(bot.NextUUID()) + strconv.Itoa(time.Now().Nanosecond())
 	var data = api.Action{
