@@ -60,7 +60,7 @@ func (p *FlattererPlugin) PrivateMsgHandler(bot api.BotAPI, privateEvent event.P
 
 func (p *FlattererPlugin) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	if p.MatchCommand(messages[0]) {
-		bot.SendGroupMsg(groupEvent.UserID, getFlattererText(), false)
+		bot.SendGroupMsg(groupEvent.GroupID, getFlattererText(), false)
 		return MESSAGE_BLOCK
 	} else {
 		return MESSAGE_IGNORE
