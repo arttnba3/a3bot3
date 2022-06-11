@@ -24,6 +24,20 @@ var Plugins = [...]Plugin{
 			Command: "/hello",
 		},
 	},
+	&FlattererPlugin{
+		PluginInfo{
+			Enable:  true,
+			Name:    "FlattererPlugin",
+			Command: "/flatterer",
+		},
+	},
+	&TodoPlugin{
+		PluginInfo: PluginInfo{
+			Enable:  false,
+			Name:    "TodoPlugin",
+			Command: "/todo",
+		},
+	},
 	&RepeaterPlugin{
 		PluginInfo: PluginInfo{
 			Enable:  true,
