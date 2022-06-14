@@ -45,7 +45,7 @@ func BotStart() {
 				UUID: 0,
 			},
 		}
-		http_bot.CQHTTPListener(config.Settings.Listen.Host, config.Settings.Listen.Port)
+		go http_bot.CQHTTPListener(config.Settings.Listen.Host, config.Settings.Listen.Port)
 	case string("ws"):
 		log.Panicln("websocket is coming soon.....")
 	case string("reverse_ws"):

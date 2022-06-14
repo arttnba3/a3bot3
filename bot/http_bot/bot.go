@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -31,7 +32,7 @@ func (bot *HTTPBot) SendRequest(i interface{}) {
 	postUrl := fmt.Sprintf("http://%v:%v/%v", bot.Host, bot.Port, data.Action)
 	byteData, err := json.Marshal(data.Params)
 	if err != nil {
-		log.Fatalln("Error occur: " + err.Error() + "\nCheck your code!")
+		log.Println("Error occur: " + err.Error() + "\nCheck your code!")
 		return
 	}
 
@@ -39,10 +40,15 @@ func (bot *HTTPBot) SendRequest(i interface{}) {
 		"application/json;charset=UTF-8",
 		bytes.NewReader(byteData))
 	if err != nil {
-		log.Fatalln("Error occur: " + err.Error() + "\nCheck cq-http!")
+		log.Println("Error occur: " + err.Error() + "\nCheck cq-http!")
 		return
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			log.Println(err)
+		}
+	}(resp.Body)
 
 	respData, _ := ioutil.ReadAll(resp.Body)
 
