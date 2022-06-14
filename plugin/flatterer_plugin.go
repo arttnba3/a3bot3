@@ -3,6 +3,7 @@ package plugin
 import (
 	"a3bot3/api"
 	"a3bot3/event"
+	"a3bot3/tools"
 	"encoding/json"
 	"io"
 	"io/ioutil"
@@ -50,19 +51,29 @@ func getFlattererText() string {
 }
 
 func (p *FlattererPlugin) PrivateMsgHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
-	if p.MatchCommand(messages[0]) {
+	// re-parsing if necessary
+	if messages == nil || len(messages) < 1 {
+		messages = tools.AutoParser(privateEvent.Message)
+	}
+
+	if len(messages) < 1 || !p.MatchCommand(messages[0]) {
+		return MESSAGE_IGNORE
+	} else {
 		bot.SendPrivateMsg(privateEvent.UserID, getFlattererText(), false)
 		return MESSAGE_BLOCK
-	} else {
-		return MESSAGE_IGNORE
 	}
 }
 
 func (p *FlattererPlugin) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
-	if p.MatchCommand(messages[0]) {
+	// re-parsing if necessary
+	if messages == nil || len(messages) < 1 {
+		messages = tools.AutoParser(groupEvent.Message)
+	}
+
+	if len(messages) < 1 || !p.MatchCommand(messages[0]) {
+		return MESSAGE_IGNORE
+	} else {
 		bot.SendGroupMsg(groupEvent.GroupID, getFlattererText(), false)
 		return MESSAGE_BLOCK
-	} else {
-		return MESSAGE_IGNORE
 	}
 }
