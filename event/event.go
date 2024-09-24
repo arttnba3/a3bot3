@@ -1,24 +1,24 @@
 package event
 
 type Event struct {
-	Time        int64                        `json:"time"`
-	SelfID      int64                        `json:"self_id"`
-	PostType    string                       `json:"post_type"`
-	MessageType string                       `json:"message_type"`
-	SubType     string                       `json:"sub_type"`
-	TempSource  int                          `json:"temp_source"`
-	MessageID   int32                        `json:"message_id"`
-	UserID      int64                        `json:"user_id"`
-	GroupID     int64                        `json:"group_id"`
-	NoticeType  string                       `json:"notice_type"`
-	Message     []map[PerMessage]interface{} `json:"message"`
-	RawMessage  string                       `json:"raw_message"`
-	Font        int32                        `json:"font"`
-	Sender      Sender                       `json:"sender"`
-	Anonymous   Anonymous                    `json:"anonymous"`
-	OperatorID  int64                        `json:"operator_id"`
-	File        File                         `json:"file"`
-	RequestType string                       `json:"request_type"`
+	Time        int64       `json:"time"`
+	SelfID      int64       `json:"self_id"`
+	PostType    string      `json:"post_type"`
+	MessageType string      `json:"message_type"`
+	SubType     string      `json:"sub_type"`
+	TempSource  int         `json:"temp_source"`
+	MessageID   int32       `json:"message_id"`
+	UserID      int64       `json:"user_id"`
+	GroupID     int64       `json:"group_id"`
+	NoticeType  string      `json:"notice_type"`
+	Message     interface{} `json:"message"`
+	RawMessage  string      `json:"raw_message"`
+	Font        int32       `json:"font"`
+	Sender      Sender      `json:"sender"`
+	Anonymous   Anonymous   `json:"anonymous"`
+	OperatorID  int64       `json:"operator_id"`
+	File        File        `json:"file"`
+	RequestType string      `json:"request_type"`
 }
 
 type PrivateEvent struct {
