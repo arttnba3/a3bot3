@@ -16,7 +16,7 @@ func (p *PluginManager) PrivateMsgHandler(bot api.BotAPI, privateEvent event.Pri
 
 	// re-parsing if necessary
 	if messages == nil || len(messages) < 1 {
-		messages = tools.AutoParser(privateEvent.Message)
+		messages = tools.AutoParser(privateEvent.RawMessage)
 	}
 
 	if len(messages) < 1 || !p.MatchCommand(messages[0]) {
@@ -41,7 +41,7 @@ func (p *PluginManager) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEv
 
 	// re-parsing if necessary
 	if messages == nil || len(messages) < 1 {
-		messages = tools.AutoParser(groupEvent.Message)
+		messages = tools.AutoParser(groupEvent.RawMessage)
 	}
 
 	if len(messages) < 1 || !p.MatchCommand(messages[0]) {

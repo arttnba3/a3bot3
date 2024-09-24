@@ -53,7 +53,7 @@ func getFlattererText() string {
 func (p *FlattererPlugin) PrivateMsgHandler(bot api.BotAPI, privateEvent event.PrivateEvent, messages []string) int {
 	// re-parsing if necessary
 	if messages == nil || len(messages) < 1 {
-		messages = tools.AutoParser(privateEvent.Message)
+		messages = tools.AutoParser(privateEvent.RawMessage)
 	}
 
 	if len(messages) < 1 || !p.MatchCommand(messages[0]) {
@@ -67,7 +67,7 @@ func (p *FlattererPlugin) PrivateMsgHandler(bot api.BotAPI, privateEvent event.P
 func (p *FlattererPlugin) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	// re-parsing if necessary
 	if messages == nil || len(messages) < 1 {
-		messages = tools.AutoParser(groupEvent.Message)
+		messages = tools.AutoParser(groupEvent.RawMessage)
 	}
 
 	if len(messages) < 1 || !p.MatchCommand(messages[0]) {

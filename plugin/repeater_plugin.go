@@ -20,16 +20,16 @@ func (p *RepeaterPlugin) PrivateMsgHandler(bot api.BotAPI, privateEvent event.Pr
 func (p *RepeaterPlugin) GroupMsgHandler(bot api.BotAPI, groupEvent event.GroupEvent, messages []string) int {
 	groupId := groupEvent.GroupID
 
-	if lastMsgGroup[groupId] == groupEvent.Message {
+	if lastMsgGroup[groupId] == groupEvent.RawMessage {
 		if !perGroupRepeated[groupId] {
-			bot.SendGroupMsg(groupId, groupEvent.Message, false)
+			bot.SendGroupMsg(groupId, groupEvent.RawMessage, false)
 			perGroupRepeated[groupId] = true
 		}
 	} else {
 		perGroupRepeated[groupId] = false
 	}
 
-	lastMsgGroup[groupId] = groupEvent.Message
+	lastMsgGroup[groupId] = groupEvent.RawMessage
 
 	return MESSAGE_BLOCK
 }

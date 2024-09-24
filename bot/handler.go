@@ -32,19 +32,19 @@ func MessageHandler(perEvent event.Event) {
 		 * If you'd like so, just use the messages params simply.
 		 */
 		if config.Settings.ParseCommandOnly {
-			msg := perEvent.Message
+			msg := perEvent.RawMessage
 			if (len(msg) > 0) && (msg[0] == '/') {
 				messages = tools.AutoParser(msg)
 			}
 		} else {
-			messages = tools.AutoParser(perEvent.Message)
+			messages = tools.AutoParser(perEvent.RawMessage)
 		}
 		switch perEvent.MessageType {
 		case "private":
-			log.Println("received private message:\""+perEvent.Message+"\" from sender:", perEvent.UserID)
+			log.Println("received private message:\""+perEvent.RawMessage+"\" from sender:", perEvent.UserID)
 			PrivateEventHandler(A3bot, event.PrivateEvent{Event: perEvent}, messages, "PrivateMsgHandler")
 		case "group":
-			log.Println("received group message:\""+perEvent.Message+"\" from sender:", perEvent.Sender.UserID, "at group:", perEvent.GroupID)
+			log.Println("received group message:\""+perEvent.RawMessage+"\" from sender:", perEvent.Sender.UserID, "at group:", perEvent.GroupID)
 			GroupEventHandler(A3bot, event.GroupEvent{Event: perEvent}, messages, "GroupMsgHandler")
 		default:
 			log.Println("Unsupported message type:", perEvent.MessageType)
