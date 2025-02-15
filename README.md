@@ -1,5 +1,7 @@
 # a3bot3 - Documentation
 
+**⚠This project is no longer under maintenance!⚠**
+
 ## Introduction
 
 _Yet another QQbot developed by arttnba3 with golang, based on go-cqhttp_
