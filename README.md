@@ -4,23 +4,23 @@
 
 ## Introduction
 
-_Yet another QQbot developed by arttnba3 with golang, based on go-cqhttp_
+_Yet another chat bot, compatible with Onebot v11 API._
 
 ## Usage
 
 ### _*Requirement_
 
-You need to have a [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) firstly, config it, then run it with a3bot3
+You need to have a backend that is compatible with [OneBot-v11 Specification](https://github.com/botuniverse/onebot-11). All you need to do is setting it up, then running the a3bot3.
 
 ### Build
 
-The project doesn't need extra packages temporarily, so you can build it simply with:
+Currently the project doesn't need extra packages, so you can build it just simply with:
 
 ```shell
 $ go build
 ```
 
-Then an executable binary file `a3bot` will appear. JUST RUN TI WITH `go-cqhttp`.
+Then an executable binary file `a3bot3` will appear. JUST RUN TI WITH your own OneBot-compatible backend.
 
 ## Config
 
@@ -50,7 +50,7 @@ Supported connection type now:
 
 ## API
 
-The a3bot3 satisfies the [OneBot API](https://onebot.dev/), with Camel-Case (Because of fucking art of golang)
+The a3bot3 satisfies the [OneBot v11 API](https://github.com/botuniverse/onebot-11), with Camel-Case (Because of fucking art of golang)
 
 ## Plugins
 
@@ -119,11 +119,13 @@ func (p *YourPlugin) GroupRecallHandler(bot api.BotAPI, groupEvent event.GroupEv
 
 Then run the bot make the plugin enabled. When the group-recalling event comes, your own `GroupRecallHandler` will be called automatically by the bot.
 
-## To-do list
+## ~~To-do list~~
 
-- Add connection type:
-  - reverse websocket
-- Complete All OneBot APIs
-- Add a more-complete plugin systems
-- Add more plugins
-  - move some plugins from [a3bot2](https://github.com/arttnba3/a3bot2)
+- ~~Add connection type:~~
+  - ~~reverse websocket~~
+- ~~Complete All OneBot APIs~~
+- ~~Add a more-complete plugin systems~~
+- ~~Add more plugins~~
+  - ~~move some plugins from [a3bot2](https://github.com/arttnba3/a3bot2)~~
+
+This project is no longer under development and maintenance.

@@ -26,7 +26,7 @@ var Plugins = [...]Plugin{
 	},
 	&FlattererPlugin{
 		PluginInfo{
-			Enable:  true,
+			Enable:  false,
 			Name:    "FlattererPlugin",
 			Command: "/flatterer",
 		},
@@ -47,7 +47,7 @@ var Plugins = [...]Plugin{
 	},
 	&AntiRecallPlugin{
 		PluginInfo: PluginInfo{
-			Enable: false,
+			Enable: true,
 			Name:   "AntiRecallPlugin",
 		},
 	},

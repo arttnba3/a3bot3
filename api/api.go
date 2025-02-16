@@ -41,14 +41,14 @@ type ResponseBody struct {
 }
 
 type ResponseData struct {
-	Message     string `json:"message"`
-	MessageID   int32  `json:"message_id"`
-	Group       bool   `json:"group"`
-	MessageSeq  int64  `json:"message_seq"`
-	MessageType string `json:"message_type"`
-	ReadID      int32  `json:"real_id"`
-	Sender      Sender `json:"sender"`
-	Time        int32  `json:"time"`
+	Message     []MessageItem `json:"message"`
+	MessageID   int32         `json:"message_id"`
+	Group       bool          `json:"group"`
+	MessageSeq  int64         `json:"message_seq"`
+	MessageType string        `json:"message_type"`
+	ReadID      int32         `json:"real_id"`
+	Sender      Sender        `json:"sender"`
+	Time        int32         `json:"time"`
 }
 
 type Sender struct {
@@ -56,13 +56,22 @@ type Sender struct {
 	UserID   int64  `json:"user_id"`
 }
 
+type MessageItemData struct {
+	Text string `json:"text"`
+}
+
+type MessageItem struct {
+	Type string      `json:"type"`
+	Data interface{} `json:"data"`
+}
+
 type Message struct {
-	Message     string `json:"message"`
-	MessageID   int32  `json:"message_id"`
-	MessageType string `json:"message_type"`
-	ReadID      int32  `json:"real_id"`
-	Sender      Sender `json:"sender"`
-	Time        int32  `json:"time"`
+	Message     []MessageItem `json:"message"`
+	MessageID   int32         `json:"message_id"`
+	MessageType string        `json:"message_type"`
+	ReadID      int32         `json:"real_id"`
+	Sender      Sender        `json:"sender"`
+	Time        int32         `json:"time"`
 }
 
 type NodeData struct {
